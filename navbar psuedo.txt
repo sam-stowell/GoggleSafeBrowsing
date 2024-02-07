@@ -1,0 +1,50 @@
+###set up of toolbar possibly using pyqt5/pyqtwebbrowser
+addtoolbar(nav_bar)
+
+### sets button up with an icon and description
+action_button = action(icon(previmage), 'description')
+
+### sets button description
+action_button.description("description of what the button does")
+
+### browser completes action
+action_button.triggered(*action*)
+
+### button gets added
+nav_bar.add(action_button)
+
+
+
+
+
+### search_url will be the url the user typed in the search bar
+if search_url has no "https://"
+	search_url = "https://" + search_url
+	
+### the url in the bar will be looked up
+results = safebrowsinglookup(search_url)
+
+### the results should display a section about the safety
+if results(malware) == True:
+
+	### popup box set up
+	msgbox = msgboxsetup
+	msgbox.title("ALERT")
+	msgbox.text("MALWARE DETECTED")
+	msgbox.icon(redcrossicon)
+	msgbox.options("What would you like to do?")
+	msgbox.buttons("Ok" , "Details" , "Cancel")
+	msgbox.details("The site you are trying to access has been flagged as potentially malicious.")
+
+	### will obtain the time and timezone etc
+	time = timezone
+	file = open("malware_report.txt","a")
+	file.write(time + malware details + site)
+	file.close()
+
+	### load homepage again
+	browser.load(homepage)
+else:
+	### q is the query 
+	browser.load(q)
+	
